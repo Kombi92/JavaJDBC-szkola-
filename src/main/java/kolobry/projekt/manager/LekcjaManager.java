@@ -26,6 +26,7 @@ public class LekcjaManager {
 	private PreparedStatement addLekcjaStmt;
 	private PreparedStatement deleteAllLekcjaStmt;
 	private PreparedStatement getAllLekcjaStmt;
+	private PreparedStatement deleteLekcjaStmt;
 
 	private Statement statement;
 
@@ -51,6 +52,8 @@ public class LekcjaManager {
 					.prepareStatement("INSERT INTO Lekcja (rodzaj,ilosc_godzin) VALUES (?, ?)");
 			deleteAllLekcjaStmt = connection
 					.prepareStatement("DELETE FROM Lekcja");
+			deleteLekcjaStmt = connection
+					.prepareStatement("DELETE FROM Lekcja WHERE idLekcja= ? ");
 			getAllLekcjaStmt = connection
 					.prepareStatement("SELECT * FROM Lekcja");
 
@@ -66,6 +69,15 @@ public class LekcjaManager {
 	public void clearLekcja() {
 		try {
 			deleteAllLekcjaStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void clearLekcja(long aj) {
+		try {
+			deleteLekcjaStmt.setLong(1, aj);
+			deleteLekcjaStmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

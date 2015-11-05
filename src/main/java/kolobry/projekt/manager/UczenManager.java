@@ -28,6 +28,7 @@ public class UczenManager {
 	private PreparedStatement addUczenStmt;
 	private PreparedStatement deleteAllUczenStmt;
 	private PreparedStatement getAllUczenStmt;
+	private PreparedStatement deleteUczenStmt;
 
 	private Statement statement;
 
@@ -53,6 +54,8 @@ public class UczenManager {
 					.prepareStatement("INSERT INTO Uczen (imie,nazw,doswiadczenie,idLekcja) VALUES (?, ?, ?, ?)");
 			deleteAllUczenStmt = connection
 					.prepareStatement("DELETE FROM Uczen");
+			deleteUczenStmt = connection
+					.prepareStatement("DELETE FROM Uczen WHERE idUczen= ? ");
 			getAllUczenStmt = connection
 					.prepareStatement("SELECT * FROM Uczen");
 
@@ -68,6 +71,15 @@ public class UczenManager {
 	public void clearUczen() {
 		try {
 			deleteAllUczenStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void clearUczen(long aj) {
+		try {
+			deleteUczenStmt.setLong(1, aj);
+			deleteUczenStmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

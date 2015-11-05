@@ -20,7 +20,7 @@ public class Testy {
 	private final static String IMIE_1 = "Zenek";
 	private final static String NAZWISKO_1 = "zly";
 	private final static String DOSW_1 = "Podstawowy";
-	private final static long LEKCJA_1 = 1;
+	private final static long LEKCJA_1 = 13;
 	
 	private final static String RODZAJ_1 = "Narty";
 	private final static String GODZ_1 = "30";
@@ -49,7 +49,7 @@ public class Testy {
 	}
 	
 	@Test
-	public void chcecAddingLekcja(){
+	public void checkAddingLekcja(){
 		Lekcja lekcja = new Lekcja(RODZAJ_1, GODZ_1);
 		
 		//LekcjaManager.clearLekcja();
@@ -61,6 +61,49 @@ public class Testy {
 		assertEquals(RODZAJ_1, LekcjaRetrieved.getRodzaj());
 		assertEquals(GODZ_1, LekcjaRetrieved.getGodz());
 		
+	}
+	
+	@Test
+	public void checkDrop(){
+	//	DAOManager daoManager = DAOManager.getInstance();
+   //     daoManager.open();
+     //   PlayerDao playerDao = daoManager.getPlayerDao();
+       // TeamDao teamDao = daoManager.getTeamDao();
+		
+		//LekcjaManager LekcjManager = LekcjaManager.getAllLekcja()
+				  
+        Uczen uczen1 = new Uczen();
+        Uczen uczen2 = new Uczen();
+        Lekcja lekcja1 = new Lekcja("snowboard","20");
+       
+        uczen1.setImie("Juzek"); uczen1.setNazw("fajny"); uczen1.setDosw("brak"); uczen1.setLekcja(4);
+        uczen2.setImie("marcin"); uczen2.setNazw("lool"); uczen2.setDosw("duze");uczen2.setLekcja(6);
+      //  lekcja1.setRodzaj("snowboard"); lekcja1.setGodz("20");
+        
+        assertEquals(1,UczenManager.addUczen(uczen1));
+        assertEquals(1,UczenManager.addUczen(uczen2));
+        LekcjaManager.addLekcja(lekcja1);
+      
+        List<Lekcja> lekcje = LekcjaManager.getAllLekcja();
+		List<Uczen> uczniowie = UczenManager.getAllUczen();
+       
+		
+		//assertTrue(uczniowie.contains(uczen1));
+        //assertTrue(uczniowie.contains(uczen2));
+		
+       int x =uczniowie.size();
+       int y = lekcje.size();
+       
+       UczenManager.clearUczen(uczniowie.get(x - 1).getIdUczen());
+       UczenManager.clearUczen(uczniowie.get(x - 2).getIdUczen());
+       LekcjaManager.clearLekcja(lekcje.get(y - 1).getIdLekcja());
+       uczniowie = UczenManager.getAllUczen();
+       lekcje = LekcjaManager.getAllLekcja();
+       assertEquals(x-2,uczniowie.size());
+       assertEquals(y-1,lekcje.size());
+		
+        
+        
 	}
 	
 	
