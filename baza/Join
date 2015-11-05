@@ -1,0 +1,3 @@
+SELECT u.imie, u.nazw, u.doswiadczenie, l.rodzaj, l.ilosc_godzin FROM
+Uczen u LEFT JOIN Lekcja l
+ON u.idLekcja=l.idLekcja;

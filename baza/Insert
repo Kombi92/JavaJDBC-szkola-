@@ -1,0 +1,7 @@
+INSERT INTO Lekcja (rodzaj , ilosc_godzin) VALUES ('snowboard', '40');
+INSERT INTO Lekcja (rodzaj , ilosc_godzin) VALUES ('narty', '50');
+
+INSERT INTO Uczen (imie, nazw, doswiadczenie, idLekcja) VALUES ('Konrad'   , 'Olobry'    , 'Podstawowe', 1);
+INSERT INTO Uczen (imie, nazw, doswiadczenie, idLekcja) VALUES ('Jan'   , 'Kowalski'    , 'Zaawansowane', 2);
+INSERT INTO Uczen (imie, nazw, doswiadczenie, idLekcja) VALUES ('Janusz'   , 'Nowak'    , 'Zaawansowane', 1);
+INSERT INTO Uczen (imie, nazw, doswiadczenie, idLekcja) VALUES ('Michał'   , 'Wczorajszy'    , 'Podstawowe', 1);
