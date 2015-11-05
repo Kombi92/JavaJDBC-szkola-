@@ -61,11 +61,11 @@ public class UczenManager {
 		}
 	}
 
-	Connection getConnection() {
+	public Connection getConnection() {
 		return connection;
 	}
 
-	void clearPersons() {
+	public void clearUczen() {
 		try {
 			deleteAllUczenStmt.executeUpdate();
 		} catch (SQLException e) {
@@ -73,7 +73,7 @@ public class UczenManager {
 		}
 	}
 
-	public int addPerson(Uczen Uczen) {
+	public int addUczen(Uczen Uczen) {
 		int count = 0;
 		try {
 			addUczenStmt.setString(1, Uczen.getImie());
@@ -89,7 +89,7 @@ public class UczenManager {
 		return count;
 	}
 
-	public List<Uczen> getAllPersons() {
+	public List<Uczen> getAllUczen() {
 		List<Uczen> Uczniowie = new ArrayList<Uczen>();
 
 		try {
@@ -101,7 +101,7 @@ public class UczenManager {
 				u.setImie(rs.getString("imie"));
 				u.setNazw(rs.getString("nazw"));
 				u.setDosw(rs.getString("doswiadczenie"));
-				u.setLekcja(rs.getLong("Lekcja"));
+				u.setLekcja(rs.getLong("IdLekcja"));
 				Uczniowie.add(u);
 			}
 

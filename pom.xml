@@ -4,7 +4,7 @@
 
   <groupId>kolobry.projekt</groupId>
   <artifactId>mejwen</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>mejwen</name>
@@ -24,8 +24,8 @@
 		    </plugin>
 		  </plugins>
 	  </pluginManagement>
-  </build>
-
+  </build> 
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
