@@ -12,6 +12,8 @@ public class Lekcja {
 		this.rodzaj = rodzaj;
 		this.ilosc_godzin = ilosc_godzin;
 	}
+	public Lekcja() {
+	}
 	
 	public long getIdLekcja() {
 		return idLekcja;
@@ -22,7 +24,7 @@ public class Lekcja {
 	public String getRodzaj() {
 		return rodzaj;
 	}
-	public void setName(String rodzaj) {
+	public void setRodzaj(String rodzaj) {
 		this.rodzaj = rodzaj;
 	}
 	public String getGodz() {
