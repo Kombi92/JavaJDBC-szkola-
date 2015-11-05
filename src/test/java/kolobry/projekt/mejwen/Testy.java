@@ -20,7 +20,7 @@ public class Testy {
 	private final static String IMIE_1 = "Zenek";
 	private final static String NAZWISKO_1 = "zly";
 	private final static String DOSW_1 = "Podstawowy";
-	private final static long LEKCJA_1 = 13;
+	//private final static long LEKCJA_1 = 13;
 	
 	private final static String RODZAJ_1 = "Narty";
 	private final static String GODZ_1 = "30";
@@ -34,10 +34,10 @@ public class Testy {
 	@Test
 	public void checkAddingUczen(){
 
-		Uczen uczen = new Uczen(IMIE_1, NAZWISKO_1, DOSW_1,LEKCJA_1);
+		Uczen uczen = new Uczen(IMIE_1, NAZWISKO_1, DOSW_1);
 
 		UczenManager.clearUczen();
-		assertEquals(1,UczenManager.addUczen(uczen));
+		assertEquals(1,UczenManager.addUczen1(uczen));
 		
 		List<Uczen> uczniowie = UczenManager.getAllUczen();
 		Uczen UczenRetrieved = uczniowie.get(uczniowie.size()-1);
@@ -45,7 +45,7 @@ public class Testy {
 		assertEquals(IMIE_1, UczenRetrieved.getImie());
 		assertEquals(NAZWISKO_1, UczenRetrieved.getNazw());
 		assertEquals(DOSW_1, UczenRetrieved.getDosw());
-		assertEquals(LEKCJA_1, UczenRetrieved.getLekcja());
+		
 	}
 	
 	@Test
@@ -65,12 +65,6 @@ public class Testy {
 	
 	@Test
 	public void checkDrop(){
-	//	DAOManager daoManager = DAOManager.getInstance();
-   //     daoManager.open();
-     //   PlayerDao playerDao = daoManager.getPlayerDao();
-       // TeamDao teamDao = daoManager.getTeamDao();
-		
-		//LekcjaManager LekcjManager = LekcjaManager.getAllLekcja()
 				  
         Uczen uczen1 = new Uczen();
         Uczen uczen2 = new Uczen();
@@ -78,7 +72,7 @@ public class Testy {
        
         uczen1.setImie("Juzek"); uczen1.setNazw("fajny"); uczen1.setDosw("brak"); uczen1.setLekcja(4);
         uczen2.setImie("marcin"); uczen2.setNazw("lool"); uczen2.setDosw("duze");uczen2.setLekcja(6);
-      //  lekcja1.setRodzaj("snowboard"); lekcja1.setGodz("20");
+      
         
         assertEquals(1,UczenManager.addUczen(uczen1));
         assertEquals(1,UczenManager.addUczen(uczen2));
@@ -103,9 +97,16 @@ public class Testy {
        assertEquals(y-1,lekcje.size());
 		
         
-        
 	}
 	
-	
+	@Test
+	public void checkUpdate(){
+		Lekcja lekcja =LekcjaManager.getLekcjaById(13);
+		String noweGodz = "50";
+				lekcja.setGodz(noweGodz);
+		LekcjaManager.updateLekcja(lekcja);
+		Lekcja lekcja2 = LekcjaManager.getLekcjaByGodziny("50");
+		assertEquals(lekcja.getIdLekcja(),lekcja2.getIdLekcja());
+	}
 
 }

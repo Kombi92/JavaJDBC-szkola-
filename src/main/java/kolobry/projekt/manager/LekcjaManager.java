@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import kolobry.projekt.mejwen.Lekcja;
 
 public class LekcjaManager {
@@ -96,6 +97,71 @@ public class LekcjaManager {
 		}
 		return count;
 	}
+	
+		public void updateLekcja(Lekcja Lekcja) {
+		
+		try {
+			
+			 connection.prepareStatement(
+											"UPDATE Lekcja SET rodzaj=\'" + Lekcja.getRodzaj() + "\'" +
+															  ", ilosc_godzin=\'" + Lekcja.getGodz() + "\'" +
+															  "WHERE idLekcja=" + Lekcja.getIdLekcja() + ";").execute();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+		
+		public Lekcja getLekcjaById(int id) {
+			
+			try {
+				
+				statement = connection.createStatement();
+				ResultSet rs = statement.executeQuery("SELECT * FROM Lekcja WHERE idLekcja=\'" + id + "\';");
+			
+				if (rs.next()) {
+					
+					Lekcja lekcja = new Lekcja(rs.getString("rodzaj"),
+									     rs.getString("ilosc_godzin"));
+					lekcja.setLekcja(rs.getLong("idLekcja"));
+					
+					return lekcja;
+				}
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+		
+			public Lekcja getLekcjaByGodziny(String godz) {
+				
+				try {
+					
+					statement = connection.createStatement();
+					ResultSet rs = statement.executeQuery("SELECT * FROM Lekcja WHERE ilosc_godzin=\'" + godz + "\';");
+				
+					if (rs.next()) {
+						
+						Lekcja lekcja = new Lekcja(rs.getString("rodzaj"),
+										     rs.getString("ilosc_godzin"));
+						lekcja.setLekcja(rs.getLong("idLekcja"));
+						
+						return lekcja;
+					}
+					
+				} catch (SQLException e) {
+					
+					e.printStackTrace();
+				}
+				
+				return null;
+			}
 
 	public List<Lekcja> getAllLekcja() {
 		List<Lekcja> Lekcje = new ArrayList<Lekcja>();

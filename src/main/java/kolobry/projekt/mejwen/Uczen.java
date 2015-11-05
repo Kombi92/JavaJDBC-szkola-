@@ -29,6 +29,13 @@ public class Uczen {
 		this.Lekcja = Lekcja;
 		
 	}
+	public Uczen(String imie, String nazw,  String doswiadczenie) {
+		
+		this.imie = imie;
+		this.nazw = nazw;
+		this.doswiadczenie = doswiadczenie;
+		
+	}
 	
 	public Uczen() {
 	}

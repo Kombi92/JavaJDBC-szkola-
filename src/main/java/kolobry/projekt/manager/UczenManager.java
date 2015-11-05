@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import kolobry.projekt.mejwen.Lekcja;
 import kolobry.projekt.mejwen.Uczen;
 
 public class UczenManager {
@@ -29,6 +30,7 @@ public class UczenManager {
 	private PreparedStatement deleteAllUczenStmt;
 	private PreparedStatement getAllUczenStmt;
 	private PreparedStatement deleteUczenStmt;
+	private PreparedStatement addUczen1Stmt;
 
 	private Statement statement;
 
@@ -52,6 +54,8 @@ public class UczenManager {
 
 			addUczenStmt = connection
 					.prepareStatement("INSERT INTO Uczen (imie,nazw,doswiadczenie,idLekcja) VALUES (?, ?, ?, ?)");
+			addUczen1Stmt = connection
+					.prepareStatement("INSERT INTO Uczen (imie,nazw,doswiadczenie) VALUES (?, ?, ?)");
 			deleteAllUczenStmt = connection
 					.prepareStatement("DELETE FROM Uczen");
 			deleteUczenStmt = connection
@@ -99,6 +103,39 @@ public class UczenManager {
 			e.printStackTrace();
 		}
 		return count;
+	}
+	public int addUczen1(Uczen Uczen) {
+		int count = 0;
+		try {
+			addUczen1Stmt.setString(1, Uczen.getImie());
+			addUczen1Stmt.setString(2, Uczen.getNazw());
+			addUczen1Stmt.setString(3, Uczen.getDosw());
+			//addUczenStmt.setLong(4, Uczen.getLekcja());
+
+			count = addUczen1Stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+public void updateLekcja(Uczen Uczen) {
+		
+		try {
+			
+			 connection.prepareStatement(
+											"UPDATE Uczen SET imie=\'" + Uczen.getImie() + "\'" +
+															  "nazw=\'" + Uczen.getNazw() + "\'" +
+															  "doswiadczenie=\'" + Uczen.getDosw() + "\'" +
+															  "WHERE idUczen=" + Uczen.getIdUczen() + ";").execute();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
 	}
 
 	public List<Uczen> getAllUczen() {
