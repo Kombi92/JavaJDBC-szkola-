@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import kolobry.projekt.mejwen.Lekcja;
+//import kolobry.projekt.mejwen.Lekcja;
 import kolobry.projekt.mejwen.Uczen;
 
 public class UczenManager {
