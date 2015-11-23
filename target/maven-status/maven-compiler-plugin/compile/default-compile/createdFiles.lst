@@ -1,3 +1,4 @@
 kolobry\projekt\mejwen\Lekcja.class
 kolobry\projekt\mejwen\Uczen.class
 kolobry\projekt\manager\UczenManager.class
+kolobry\projekt\manager\LekcjaManager.class

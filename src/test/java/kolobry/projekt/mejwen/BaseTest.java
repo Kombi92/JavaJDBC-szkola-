@@ -36,8 +36,9 @@ public class BaseTest {
 
 		Uczen uczen = new Uczen(IMIE_1, NAZWISKO_1, DOSW_1);
 
-		UczenManager.clearUczen();
-		assertEquals(1,UczenManager.addUczen1(uczen));
+		//UczenManager.clearUczen();
+		//assertEquals(1,UczenManager.addUczen1(uczen));
+		UczenManager.addUczen1(uczen);
 		
 		List<Uczen> uczniowie = UczenManager.getAllUczen();
 		Uczen UczenRetrieved = uczniowie.get(uczniowie.size()-1);
@@ -70,20 +71,15 @@ public class BaseTest {
         Uczen uczen2 = new Uczen();
         Lekcja lekcja1 = new Lekcja("snowboard","20");
        
-        uczen1.setImie("Juzek"); uczen1.setNazw("fajny"); uczen1.setDosw("brak"); uczen1.setLekcja(2);
-        uczen2.setImie("marcin"); uczen2.setNazw("lool"); uczen2.setDosw("duze");uczen2.setLekcja(3);
+        uczen1.setImie("Juzek"); uczen1.setNazw("fajny"); uczen1.setDosw("brak"); uczen1.setLekcja(1);
+        uczen2.setImie("marcin"); uczen2.setNazw("lool"); uczen2.setDosw("duze"); uczen2.setLekcja(2);
       
         LekcjaManager.addLekcja(lekcja1);
         assertEquals(1,UczenManager.addUczen(uczen1));
         assertEquals(1,UczenManager.addUczen(uczen2));
-        
-      
+
         List<Lekcja> lekcje = LekcjaManager.getAllLekcja();
 		List<Uczen> uczniowie = UczenManager.getAllUczen();
-       
-		
-		//assertTrue(uczniowie.contains(uczen1));
-        //assertTrue(uczniowie.contains(uczen2));
 		
        int x =uczniowie.size();
        int y = lekcje.size();
@@ -101,9 +97,10 @@ public class BaseTest {
 	
 	@Test
 	public void checkUpdate(){
+		
 		Lekcja lekcja =LekcjaManager.getLekcjaById(1);
 		String noweGodz = "50";
-				lekcja.setGodz(noweGodz);
+		lekcja.setGodz(noweGodz);
 		LekcjaManager.updateLekcja(lekcja);
 		Lekcja lekcja2 = LekcjaManager.getLekcjaByGodziny("50");
 		assertEquals(lekcja.getIdLekcja(),lekcja2.getIdLekcja());
@@ -117,7 +114,62 @@ public class BaseTest {
          
          uczen.setLekcja(lekcja.getIdLekcja());
                 
-                 assertEquals(uczen.getLekcja(),lekcja.getIdLekcja());
+         assertEquals(uczen.getLekcja(),lekcja.getIdLekcja());
 	}
 
+	/*@Test
+	public void checkRealtionDelete(){
+	
+		 
+         Lekcja lekcja = new Lekcja("narty","10");
+         lekcja.setLekcja(190);
+         
+         LekcjaManager.addLekcjaID(lekcja);
+         Uczen uczen = new Uczen("ja","tez","dobry",lekcja.getIdLekcja());
+         
+         UczenManager.addUczen(uczen);
+         
+         LekcjaManager.clearLekcja1(190);
+         
+         assertNull(LekcjaManager.getLekcjaById(190));
+         assertNull(UczenManager.getUczenById(uczen.getIdUczen()).getLekcja());
+         
+         
+	}*/
+	
+	// POBRANIE X NALEZACYCH Y
+	
+	@Test
+	public void checkExistingRelation(){
+		
+		UczenManager.clearUczen();
+		
+		Lekcja lekcja;
+		
+		if( LekcjaManager.getLekcjaById(99) == null){
+			
+		 lekcja = new Lekcja("narty","10");
+		 lekcja.setLekcja(99);
+		 LekcjaManager.addLekcjaID(lekcja);
+		 }
+		else{
+			 lekcja = LekcjaManager.getLekcjaById(99);
+		}
+		
+		 Uczen uczen = new Uczen("ja","tez","dobry",lekcja.getIdLekcja());
+		 Uczen uczen1 = new Uczen("ja","tez","dobry",lekcja.getIdLekcja());
+		 Uczen uczen2 =new Uczen ("ja","tez","dobry",1);
+		
+		UczenManager.addUczen(uczen);
+		UczenManager.addUczen(uczen1);
+		UczenManager.addUczen(uczen2);
+		
+		List<Uczen> uczniowie = UczenManager.getAllUczenByLekcja(lekcja.getIdLekcja());
+		
+		assertEquals(uczniowie.size(),2);
+		
+	}
+	
+	
+	
 }

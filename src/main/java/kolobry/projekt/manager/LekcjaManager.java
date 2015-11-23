@@ -25,6 +25,7 @@ public class LekcjaManager {
 										+"ilosc_godzin VARCHAR(4) NOT NULL);";
 
 	private PreparedStatement addLekcjaStmt;
+	private PreparedStatement addLekcjaIDStmt;
 	private PreparedStatement deleteAllLekcjaStmt;
 	private PreparedStatement getAllLekcjaStmt;
 	private PreparedStatement deleteLekcjaStmt;
@@ -51,6 +52,8 @@ public class LekcjaManager {
 
 			addLekcjaStmt = connection
 					.prepareStatement("INSERT INTO Lekcja (rodzaj,ilosc_godzin) VALUES (?, ?)");
+			addLekcjaIDStmt = connection
+					.prepareStatement("INSERT INTO Lekcja (idLekcja,rodzaj,ilosc_godzin) VALUES (?, ?, ?)");
 			deleteAllLekcjaStmt = connection
 					.prepareStatement("DELETE FROM Lekcja");
 			deleteLekcjaStmt = connection
@@ -83,6 +86,16 @@ public class LekcjaManager {
 			e.printStackTrace();
 		}
 	}
+	public void clearLekcja1(long aj) {
+		try {
+			Statement statement = connection.createStatement();
+			statement.executeQuery("UPDATE UCZEN SET idLekcja = NULL WHERE idLekcja =" + aj + ";");
+			deleteLekcjaStmt.setLong(1, aj);
+			deleteLekcjaStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public int addLekcja(Lekcja Lekcja) {
 		int count = 0;
@@ -91,6 +104,21 @@ public class LekcjaManager {
 			addLekcjaStmt.setString(2, Lekcja.getGodz());
 
 			count = addLekcjaStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	public int addLekcjaID(Lekcja Lekcja) {
+		int count = 0;
+		try {
+			addLekcjaIDStmt.setLong(1, Lekcja.getIdLekcja());
+			addLekcjaIDStmt.setString(2, Lekcja.getRodzaj());
+			addLekcjaIDStmt.setString(3, Lekcja.getGodz());
+
+			count = addLekcjaIDStmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

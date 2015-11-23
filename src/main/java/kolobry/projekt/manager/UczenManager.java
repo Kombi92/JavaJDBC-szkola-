@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //import kolobry.projekt.mejwen.Lekcja;
+//import kolobry.projekt.mejwen.Lekcja;
 import kolobry.projekt.mejwen.Uczen;
 
 public class UczenManager {
@@ -24,14 +25,15 @@ public class UczenManager {
 										+ "Imie VARCHAR(30) NOT NULL, "
 										+ "nazw VARCHAR(50) NOT NULL,"
 										+ "doswiadczenie VARCHAR(50) NOT NULL,"
-										+ "idLekcja BIGINT FOREIGN KEY REFERENCES Lekcja(idLekcja));";
+										+ "idLekcja BIGINT FOREIGN KEY REFERENCES Lekcja(idLekcja) on delete set null);";
 
 	private PreparedStatement addUczenStmt;
 	private PreparedStatement deleteAllUczenStmt;
 	private PreparedStatement getAllUczenStmt;
 	private PreparedStatement deleteUczenStmt;
 	private PreparedStatement addUczen1Stmt;
-
+	private PreparedStatement getAllUczenByLekcjaStmt;
+	
 	private Statement statement;
 
 	public UczenManager() {
@@ -62,6 +64,8 @@ public class UczenManager {
 					.prepareStatement("DELETE FROM Uczen WHERE idUczen= ? ");
 			getAllUczenStmt = connection
 					.prepareStatement("SELECT * FROM Uczen");
+			getAllUczenByLekcjaStmt = connection
+					.prepareStatement("SELECT * FROM Uczen where idLekcja = ?");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -120,6 +124,32 @@ public class UczenManager {
 		return count;
 	}
 	
+	public Uczen getUczenById(long id) {
+		
+		try {
+			
+			statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * FROM Uczen WHERE idUczen=\'" + id + "\';");
+		
+			if (rs.next()) {
+				
+				Uczen uczen = new Uczen(rs.getString("imie"),
+								     rs.getString("nazw"),
+										rs.getString("doswiadczenie"));
+				uczen.setIdUczen(rs.getLong("idUczen"));
+				
+				return uczen;
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	
 public void updateLekcja(Uczen Uczen) {
 		
 		try {
@@ -160,4 +190,28 @@ public void updateLekcja(Uczen Uczen) {
 		return Uczniowie;
 	}
 
+	
+	public List<Uczen> getAllUczenByLekcja(long ID) {
+		List<Uczen> Uczniowie = new ArrayList<Uczen>();
+
+		try {
+			getAllUczenByLekcjaStmt.setLong(1,ID);
+			
+			ResultSet rs = getAllUczenByLekcjaStmt.executeQuery();
+
+			while (rs.next()) {
+				Uczen u = new Uczen();
+				u.setIdUczen(rs.getInt("idUczen"));
+				u.setImie(rs.getString("imie"));
+				u.setNazw(rs.getString("nazw"));
+				u.setDosw(rs.getString("doswiadczenie"));
+				u.setLekcja(rs.getLong("IdLekcja"));
+				Uczniowie.add(u);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Uczniowie;
+	}
 }

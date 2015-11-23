@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="0" failures="0" name="kolobry.projekt.mejwen.BaseTest" time="0" errors="0" skipped="0">
+<testsuite tests="7" failures="0" name="kolobry.projekt.mejwen.BaseTest" time="0.029" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_65\jre\bin"/>
@@ -29,8 +29,7 @@
     <property name="os.name" value="Windows 7"/>
     <property name="classworlds.conf" value="C:\Users\intern\Downloads\apache-maven-3.3.3\bin\..\bin\m2.conf"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="surefire.useFile" value="false"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_65\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;C:\ProgramData\Oracle\Java\javapath;C:\Users\intern\Downloads\apache-maven-3.3.3\bin;C:\Program Files (x86)\Skype\Phone\;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_65\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;C:\ProgramData\Oracle\Java\javapath;C:\Users\intern\Downloads\apache-maven-3.3.3\bin;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\nodejs\;C:\Program Files\Git\bin;C:\Program Files\Git\cmd;C:\windows\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Users\intern\AppData\Roaming\npm;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -45,7 +44,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_65\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dsurefire.useFile=false test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean install"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -64,4 +63,11 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
+  <testcase classname="kolobry.projekt.mejwen.BaseTest" name="checkExistingRelation" time="0.012"/>
+  <testcase classname="kolobry.projekt.mejwen.BaseTest" name="checkDrop" time="0.009"/>
+  <testcase classname="kolobry.projekt.mejwen.BaseTest" name="checkConnection" time="0"/>
+  <testcase classname="kolobry.projekt.mejwen.BaseTest" name="checkAddingLekcja" time="0"/>
+  <testcase classname="kolobry.projekt.mejwen.BaseTest" name="checkUpdate" time="0.007"/>
+  <testcase classname="kolobry.projekt.mejwen.BaseTest" name="checkRelations" time="0"/>
+  <testcase classname="kolobry.projekt.mejwen.BaseTest" name="checkAddingUczen" time="0.001"/>
 </testsuite>
